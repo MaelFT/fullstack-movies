@@ -13,7 +13,15 @@ function AddMovie({ onAddMovie }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const success = await onAddMovie(formData);
+    // Easter egg: Si le film s'appelle "Ynov", on force le rating à 0 😏
+    const movieData = {
+      title: formData.title,
+      year: parseInt(formData.year),
+      genre: formData.genre,
+      rating: formData.title.toLowerCase() === 'ynov' ? 0 : parseFloat(formData.rating)
+    };
+    
+    const success = await onAddMovie(movieData);
     
     if (success) {
       setFormData({ title: '', year: '', genre: '', rating: '' });

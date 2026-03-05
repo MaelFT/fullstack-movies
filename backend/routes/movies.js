@@ -31,7 +31,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const { title, year, genre, rating } = req.body;
   
-  if (!title || !year || !genre || !rating) {
+  // Validation: accepter rating = 0 pour l'easter egg Ynov 😏
+  if (!title || !year || !genre || rating === undefined || rating === null) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
   
